@@ -5,8 +5,16 @@ import (
 	"strings"
 )
 
+/*
+You have two strings of lowercase English letters. You can perform two types of operations on the first string:
+
+Append a lowercase English letter to the end of the string.
+Delete the last character of the string. Performing this operation on an empty string results in an empty string.
+Given an integer, k, and two strings, s and t, determine whether or not you can convert s to t by performing exactly
+k of the above operations on s. If it's possible, print Yes. Otherwise, print No.
+*/
 func main() {
-	x := appendAndDelete("ashley", "ash", 2)
+	x := appendAndDelete("ashley", "ashley", 10)
 	fmt.Println(x)
 }
 func appendAndDelete(s string, t string, k int) string {
@@ -19,17 +27,14 @@ func appendAndDelete(s string, t string, k int) string {
 			continue
 		}
 	}
-	tRem := len(t) - count
-	sRem := len(s) - count
-	sTK := k - (tRem + sRem)
-	if count == len(t) && len(t) == len(s) && int(k) > count {
+	rem := (len(s) + len(t) - (2 * count))
+
+	if k >= rem && rem%2 == k%2 {
 		return "Yes"
-	}
-	if tRem+sRem < k && sTK%2 != 0 {
-		return "No"
-	} else if (tRem + sRem) <= k {
+	} else if (len(s) + len(t) - int(k)) <= 0 {
 		return "Yes"
 	} else {
 		return "No"
 	}
+	return "Yes"
 }
